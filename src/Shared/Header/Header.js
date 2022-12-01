@@ -7,6 +7,9 @@ const Header = () => {
       <li>
         <Link to="/">HOME</Link>
       </li>
+      <li>
+        <Link to="/shop">SHOP</Link>
+      </li>
       <li tabIndex={0}>
         <Link className="justify-between">
           COLLECTIONS
@@ -38,7 +41,7 @@ const Header = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 container mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -92,7 +95,7 @@ const Header = () => {
             {menuItems}
           </ul>
         </div>
-        <Link className="btn btn-ghost normal-case text-xl hidden lg:block">
+        <Link className="hidden lg:block">
           <img src="https://i.ibb.co/vcCRtMp/logo.png" alt="" />
         </Link>
       </div>
