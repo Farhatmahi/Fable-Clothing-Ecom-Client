@@ -1,7 +1,18 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const Header = () => {
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    logout()
+      .then((result) => {})
+      .catch((err) => {});
+  };
+
   const menuItems = (
     <>
       <li>
@@ -135,7 +146,7 @@ const Header = () => {
       <div className="navbar-end">
         <div className="flex justify-between items-center">
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <label tabIndex={0} className="btn btn-ghost btn-circle mr-4">
               <div className="indicator">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -169,30 +180,36 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="https://placeimg.com/80/80/people"  alt=''/>
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <Link className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </Link>
-              </li>
-              <li>
-                <Link>Settings</Link>
-              </li>
-              <li>
-                <Link>Logout</Link>
-              </li>
-            </ul>
-          </div>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img src={user?.photoURL} alt="" />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <Link className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link>Settings</Link>
+                </li>
+                <li>
+                  <Link onClick={handleLogOut}>Logout</Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link to="/login" className="btn bg-black text-white">
+              Login/Sign up
+            </Link>
+          )}
         </div>
       </div>
     </div>
