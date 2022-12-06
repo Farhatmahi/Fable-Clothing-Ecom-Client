@@ -55,7 +55,7 @@ const Login = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10">
-      <div className="ml-20">
+      <div className="lg:ml-20 px-4 lg:px-0">
         <h1 className="font-semibold text-xl mb-8">Sign In</h1>
         <form onSubmit={handleSubmit(handleLogin)} className="card-body p-0">
           <div className="form-control">
@@ -70,7 +70,7 @@ const Login = () => {
             <input
               {...register("email", { required: "Please enter your email" })}
               placeholder="email"
-              className="input input-bordered w-2/3"
+              className="input input-bordered lg:w-2/3"
             />
             {errors.email && (
               <p role="alert" className="text-error text-xs mt-2">
@@ -95,7 +95,7 @@ const Login = () => {
               })}
               type="password"
               placeholder="Password"
-              className="input input-bordered w-2/3"
+              className="input input-bordered lg:w-2/3"
             />
 
             {errors.password && (
@@ -111,7 +111,7 @@ const Login = () => {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button type="submit" className="btn bg-black text-white w-2/3">
+            <button type="submit" className="btn bg-black text-white lg:w-2/3">
               {buttonLoader ? (
                 <Oval
                   height={20}
@@ -129,10 +129,10 @@ const Login = () => {
                 "Log in"
               )}
             </button>
-            <div className="divider w-2/3">OR</div>
+            <div className="divider lg:w-2/3">OR</div>
           </div>
         </form>
-        <button onClick={handleGoogleSignIn} className="btn bg-black text-white w-2/3">
+        <button onClick={handleGoogleSignIn} className="btn bg-black text-white w-full lg:w-2/3">
         {buttonLoader ? (
                 <Oval
                   height={20}
@@ -151,14 +151,14 @@ const Login = () => {
               )}
           
         </button>
-        <h1 className="mt-4 text-center w-2/3">
+        <h1 className="mt-4 text-center lg:w-2/3">
           New here?{" "}
           <Link className="hover:underline" to="/register">
             Create an account
           </Link>
         </h1>
       </div>
-      <div className="">
+      <div className="hidden lg:block">
         <img src="https://i.ibb.co/7zxLx9Y/Foto-15.png" alt="" />
       </div>
     </div>

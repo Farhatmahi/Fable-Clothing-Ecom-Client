@@ -10,16 +10,12 @@ const Shirts = () => {
   const { data: shirts = [], isLoading } = useQuery({
     queryKey: ["shirts", type],
     queryFn: async () => {
-      const url = `http://localhost:1000/all-products/${type}`;
+      const url = `https://fable-server.vercel.app/all-products/${type}`;
       const res = await fetch(url);
       const data = await res.json();
       return data;
     },
   });
-
-  if(isLoading){
-    return <Loader />
-  }
 
   return (
     <div>
@@ -45,7 +41,7 @@ const Shirts = () => {
           </div>
         </h2>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {shirts.map((shirt) => (
           <ProductCard key={shirt._id} shirt={shirt} />
         ))}

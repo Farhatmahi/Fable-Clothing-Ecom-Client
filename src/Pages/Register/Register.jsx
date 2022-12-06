@@ -88,14 +88,14 @@ const Register = () => {
       })
       .catch((err) => {
         console.log(err);
-        
+
         setButtonLoader(false);
       });
   };
 
   const saveUserToDb = (name, email, image) => {
     const user = { name, email, image };
-    fetch("http://localhost:1000/users", {
+    fetch("https://fable-server.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -108,7 +108,7 @@ const Register = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10">
-      <div className="ml-20">
+      <div className="lg:ml-20 px-4 lg:px-0">
         <h1 className="font-semibold text-xl mb-8">Sign Up</h1>
         <form onSubmit={handleSubmit(hangleRegister)} className="card-body p-0">
           <div className="form-control">
@@ -120,7 +120,7 @@ const Register = () => {
             <input
               {...register("name", { required: "Name is required" })}
               placeholder="Full name"
-              className="input input-bordered w-2/3"
+              className="input input-bordered lg:w-2/3"
             />
           </div>
           {errors.name && (
@@ -135,7 +135,7 @@ const Register = () => {
             <input
               {...register("email", { required: "Email is required" })}
               placeholder="email"
-              className="input input-bordered w-2/3"
+              className="input input-bordered lg:w-2/3"
             />
           </div>
           <p className="text-error text-xs mt-2">{errorMessage}</p>
@@ -160,7 +160,7 @@ const Register = () => {
                 },
               })}
               placeholder="Password"
-              className="input input-bordered w-2/3"
+              className="input input-bordered lg:w-2/3"
             />
             {errors.password && (
               <p role="alert" className="text-error text-xs mt-2">
@@ -178,7 +178,7 @@ const Register = () => {
               type="file"
               {...register("image", { required: "Photo is required" })}
               placeholder="Image"
-              className="input input-bordered w-2/3"
+              className="input input-bordered lg:w-2/3"
             />
             {errors.img && (
               <p role="alert" className="text-error text-xs mt-2">
@@ -187,7 +187,7 @@ const Register = () => {
             )}
           </div>
           <div className="form-control mt-6">
-            <button type="submit" className="btn bg-black text-white w-2/3">
+            <button type="submit" className="btn bg-black text-white lg:w-2/3">
               {buttonLoader ? (
                 <Oval
                   height={20}
@@ -205,12 +205,12 @@ const Register = () => {
                 "Sign Up"
               )}
             </button>
-            <div className="divider w-2/3">OR</div>
+            <div className="divider lg:w-2/3">OR</div>
           </div>
         </form>
         <button
           onClick={handleGoogleSignIn}
-          className="btn bg-black text-white w-2/3"
+          className="btn bg-black text-white w-full lg:w-2/3"
         >
           {buttonLoader ? (
             <Oval
@@ -231,10 +231,10 @@ const Register = () => {
             </span>
           )}
         </button>
-        <h1 className="mt-4 text-center w-2/3">
-          New here?{" "}
-          <Link className="hover:underline" to="/register">
-            Create an account
+        <h1 className="mt-4 text-center lg:w-2/3">
+          Already have an account?{" "}
+          <Link className="hover:underline" to="/login">
+            Login
           </Link>
         </h1>
       </div>
