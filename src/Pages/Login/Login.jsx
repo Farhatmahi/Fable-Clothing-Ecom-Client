@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 
@@ -27,7 +27,7 @@ const Login = () => {
       .then((result) => { 
         const user = result.user;
         console.log(user);
-        toast.success("Look at my styles.");
+        // toast.success("Look at my styles.");
         setButtonLoader(false)
         navigate("/");
       })
@@ -43,7 +43,7 @@ const Login = () => {
     .then((result) => {
       const user = result.user;
         console.log(user);
-        toast.success("Look at my styles.");
+        // toast.success("Look at my styles.");
         setButtonLoader(false)
         navigate("/");
     }).catch((err) => {

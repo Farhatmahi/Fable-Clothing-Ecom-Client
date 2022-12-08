@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 import { Oval } from "react-loader-spinner";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 const Register = () => {
   const {
@@ -49,17 +49,17 @@ const Register = () => {
                 .then((result) => {
                   saveUserToDb(user.displayName, user.email, imgdata.data.url);
                   setButtonLoader(false);
-                  toast.success(`Welcome ${user.displayName}`, {
-                    style: {
-                      border: "1px solid #000000",
-                      padding: "16px",
-                      color: "#713200",
-                    },
-                    iconTheme: {
-                      primary: "#713200",
-                      secondary: "#FFFAEE",
-                    },
-                  });
+                  // toast.success(`Welcome ${user.displayName}`, {
+                  //   style: {
+                  //     border: "1px solid #000000",
+                  //     padding: "16px",
+                  //     color: "#713200",
+                  //   },
+                  //   iconTheme: {
+                  //     primary: "#713200",
+                  //     secondary: "#FFFAEE",
+                  //   },
+                  // });
                   navigate("/");
                 })
                 .catch((err) => {
@@ -82,7 +82,7 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        toast.success("Look at my styles.");
+        // toast.success("Look at my styles.");
         setButtonLoader(false);
         navigate("/");
       })

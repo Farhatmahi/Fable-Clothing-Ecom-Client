@@ -5,11 +5,13 @@ import { AuthContext } from "../../Context/AuthProvider";
 import CartCard from "./CartCard";
 import Loader from "../../Shared/Loader/Loader";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const Cart = () => {
   const { user } = useContext(AuthContext);
-  const [cartPriceWithQuantity, setcartPriceWithQuantity] = useState(0);
+  // const [cartPriceWithQuantity, setcartPriceWithQuantity] = useState(0);
   const [total, setTotal] = useState(0);
+
 
   const { data: cart = [], isLoading } = useQuery({
     queryKey: ["cart"],
@@ -58,8 +60,8 @@ const Cart = () => {
             <CartCard
               key={cartItem._id}
               cartItem={cartItem}
-              cartPriceWithQuantity={cartPriceWithQuantity}
-              setcartPriceWithQuantity={setcartPriceWithQuantity}
+              // cartPriceWithQuantity={cartPriceWithQuantity}
+              // setcartPriceWithQuantity={setcartPriceWithQuantity}
               setTotal={setTotal}
               total={total}
             />

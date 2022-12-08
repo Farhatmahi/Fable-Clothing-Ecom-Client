@@ -1,12 +1,11 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 const CartCard = ({
   cartItem,
-  setcartPriceWithQuantity,
-  cartPriceWithQuantity,
   setTotal,
-  total,
+  total
 }) => {
   const {
     _id,
@@ -18,41 +17,30 @@ const CartCard = ({
   } = cartItem;
 
   const [quantity, setQuantity] = useState(1);
-  setcartPriceWithQuantity(parseInt(product_price));
+  const productPrice = parseInt(product_price)
 
-  let newQuantity;
   const handleIncrement = () => {
-    newQuantity = setQuantity(quantity + 1);
-    return newQuantity;
+    setQuantity(quantity + 1);
   };
+
   const handleDecrement = () => {
     if (quantity > 0) {
-      newQuantity = setQuantity(quantity - 1);
-      return newQuantity;
+      setQuantity(quantity - 1);
     }
   };
 
-  console.log(newQuantity);
-  setcartPriceWithQuantity(product_price * newQuantity);
-  console.log("cartPriceWithQuantity : ", cartPriceWithQuantity);
-  // console.log(total)
-  // setTotal(total + cartPriceWithQuantity)
-  // console.log("subtotal", total);
-
-  // setcartPriceWithQuantity(product_price * quantity);
-  // setTotal(total + cartPriceWithQuantity)
-  // console.log(cartPriceWithQuantity);
-
-  //  console.log(typeof product_price);
+  // setcartPriceWithQuantity(product_price * quantity)
+  console.log(productPrice, quantity)
+  useEffect(() => {
+    setTotal(total - productPrice)
+    setTotal(productPrice + total) //110, 110+110 =220, 220+110
+  }, [productPrice, quantity])
+  
 
   return (
     <div className="card card-side bg-base-100 mb-6 rounded-none">
       <figure>
-        <img
-          src={product_image}
-          className="w-36 bg-[#F1F1EF]"
-          alt="product_image"
-        />
+        <img src={product_image} className="bg-[#F1F1EF] w-36 " alt="product_image" />
       </figure>
       <div className="card-body flex flex-col justify-between p-0 ml-4">
         <div className="">

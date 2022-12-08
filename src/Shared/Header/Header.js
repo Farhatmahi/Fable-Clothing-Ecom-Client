@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
 import { useContext } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
 
-  const handleToast = () => {
-    console.log("Here first")
-    toast("Working")
-    console.log("Here")
-  }
+  const {data : cart = []} = useQuery({
+    queryKey : ['cart', user?.email], 
+    queryFn : async() => {
+      const res = await fetch(`http://localhost:1000/cartFilteredByUser?email=${user?.email}`)
+      const data = await res.json()
+      return data
+    }
+  })
 
 
   const handleLogOut = (e) => {
@@ -33,10 +36,9 @@ const Header = () => {
         <Link to="/shop">SHOP</Link>
       </li>
       <li>
-        <p onClick={handleToast}>Toast</p>
-      </li>
-      <li>
-        <Link to='login' className="uppercase lg:hidden">Login/SignUp</Link>
+        <Link to="login" className="uppercase lg:hidden">
+          Login/SignUp
+        </Link>
       </li>
       {/* <li tabIndex={0}>
         <Link className="justify-between">
@@ -179,7 +181,7 @@ const Header = () => {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span className="badge badge-sm indicator-item"></span>
+                <span className="badge badge-sm indicator-item">{cart.length}</span>
               </div>
             </label>
             <div
@@ -187,10 +189,11 @@ const Header = () => {
               className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
             >
               <div className="card-body">
-                <span className="font-bold text-lg"> Items</span>
-                <span className="">Subtotal: € 999</span>
+                <span className="font-bold text-lg">{cart.length} Items</span>
+                <span className="">Subtotal: € 
+                </span>
                 <div className="card-actions">
-                  <Link to='/cart' className="btn btn-primary btn-block">
+                  <Link to="/cart" className="btn btn-primary btn-block">
                     View cart
                   </Link>
                 </div>
@@ -224,7 +227,9 @@ const Header = () => {
             </div>
           ) : (
             <Link to="/login" className="btn bg-black text-white">
-              <button className="hidden lg:block">Login/Sign up</button>
+              <button className="uppercase hidden lg:block">
+                Login/Sign up
+              </button>
             </Link>
           )}
         </div>
