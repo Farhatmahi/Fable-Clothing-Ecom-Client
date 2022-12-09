@@ -5,7 +5,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 import CartCard from "./CartCard";
 import Loader from "../../Shared/Loader/Loader";
 import { useState } from "react";
-import { useEffect } from "react";
+
 
 const Cart = () => {
   const { user } = useContext(AuthContext);
@@ -13,7 +13,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
 
 
-  const { data: cart = [], isLoading } = useQuery({
+  const { data: cart = [], isLoading, refetch } = useQuery({
     queryKey: ["cart"],
     queryFn: async () => {
       const res = await fetch(
@@ -70,6 +70,7 @@ const Cart = () => {
               // setcartPriceWithQuantity={setcartPriceWithQuantity}
               setTotal={setTotal}
               total={total}
+              refetch={refetch}
             />
           ))}
         </div>

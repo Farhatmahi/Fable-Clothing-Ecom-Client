@@ -2,11 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const CartCard = ({
-  cartItem,
-  setTotal,
-  total
-}) => {
+const CartCard = ({ cartItem, setTotal, total, refetch }) => {
   const {
     _id,
     product_name,
@@ -16,8 +12,19 @@ const CartCard = ({
     product_type,
   } = cartItem;
 
+  const handleDelete = (id) => {
+    fetch(`http://localhost:1000/cart/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json)
+      .then((data) => {
+        console.log(data);
+        refetch();
+      });
+  };
+
   const [quantity, setQuantity] = useState(1);
-  const productPrice = parseInt(product_price)
+  const productPrice = parseInt(product_price);
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
@@ -32,15 +39,18 @@ const CartCard = ({
   // setcartPriceWithQuantity(product_price * quantity)
   // console.log(productPrice, quantity)
   useEffect(() => {
-    setTotal(total - productPrice)
-    setTotal(productPrice + total) //110, 110+110 =220, 220+110
-  }, [productPrice, quantity])
-  
+    setTotal(total - productPrice);
+    setTotal(productPrice + total); //110, 110+110 =220, 220+110
+  }, [productPrice, quantity]);
 
   return (
     <div className="card card-side bg-base-100 mb-6 rounded-none">
       <figure>
-        <img src={product_image} className="bg-[#F1F1EF] w-36 " alt="product_image" />
+        <img
+          src={product_image}
+          className="bg-[#F1F1EF] w-36 "
+          alt="product_image"
+        />
       </figure>
       <div className="card-body flex flex-col justify-between p-0 ml-4">
         <div className="">
@@ -71,7 +81,10 @@ const CartCard = ({
         </div>
         <div className="flex justify-between">
           <p className="text-sm font-semibold">Price : € {product_price}</p>
-          <p className="hover:underline  text-gray-400 hover:text-black text-sm font-semibold">
+          <p
+            onClick={() => handleDelete(_id)}
+            className="hover:underline  text-gray-400 hover:text-black text-sm font-semibold"
+          >
             Delete
           </p>
         </div>
