@@ -30,7 +30,7 @@ const CartCard = ({
   };
 
   // setcartPriceWithQuantity(product_price * quantity)
-  console.log(productPrice, quantity)
+  // console.log(productPrice, quantity)
   useEffect(() => {
     setTotal(total - productPrice)
     setTotal(productPrice + total) //110, 110+110 =220, 220+110
@@ -50,9 +50,9 @@ const CartCard = ({
           <p className="text-xs">Product ID : {_id}</p>
         </div>
 
-        <div className="flex justify-between">
-          <p className="text-sm">Size : {product_size}</p>
-          <p className="text-sm">
+        <div className="flex justify-between items-center">
+          <p className="text-xs lg:text-sm">Size : {product_size}</p>
+          <p className="text-xs lg:text-sm">
             Quantity :{" "}
             <button
               onClick={handleDecrement}

@@ -3,7 +3,7 @@ import { ProgressBar } from "react-loader-spinner";
 
 const Loader = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center py-10">
       <ProgressBar
         height="80"
         width="80"

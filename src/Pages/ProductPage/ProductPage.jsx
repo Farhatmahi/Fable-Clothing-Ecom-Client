@@ -4,7 +4,11 @@ import { useContext } from "react";
 // import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import PaymentModal from "../../Shared/PaymentModal/PaymentModal";
 import Tabs from "./Tabs";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { toast } from "react-hot-toast";
 
 const ProductPage = () => {
   const { user } = useContext(AuthContext);
@@ -18,13 +22,15 @@ const ProductPage = () => {
     product_size,
   } = product;
 
+  const stripePromise = loadStripe(
+    "pk_test_51M7FK2JH0OzhgIOy9rRnhZiTBKnIDP2aQJVRCrfYfNuLtnLZj2I5YeuvhaFQSgkNkvOHCtkG0KCb6ku5BkQfZNyO002uQYn9Jk"
+  );
+
   const [size, setSize] = useState("XS");
   const [active, setActive] = useState(false);
 
   const handleSize = (size) => {
     setSize(size);
-    // console.log(size);
-    setActive(true);
   };
 
   const handleAddToCart = () => {
@@ -49,7 +55,32 @@ const ProductPage = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          // toast(`${product_name} added to cart`)
+          
+          toast.success(`${product_name} added to cart`, {
+            style: {
+              padding: "16px",
+              backgroundColor: "#000000",
+              color: "#ffffff",
+              borderRadius: "0",
+            },
+            iconTheme: {
+              primary: "#ffffff",
+              secondary: "#000000",
+            },
+          });
+        } else {
+          toast.error(`${product_name} already added to cart`, {
+            style: {
+              padding: "16px",
+              backgroundColor: "#000000",
+              color: "#ffffff",
+              borderRadius: "0",
+            },
+            iconTheme: {
+              primary: "#ffffff",
+              secondary: "#000000",
+            },
+          });
         }
       });
   };
@@ -81,8 +112,9 @@ const ProductPage = () => {
               <button
                 onClick={() => {
                   handleSize(size);
+                  setActive(true);
                 }}
-                className={`btn btn-square btn-outline rounded-none ml-2 
+                className={`btn btn-square btn-outline rounded-none ml-2
                 }`}
               >
                 {size}
@@ -96,13 +128,19 @@ const ProductPage = () => {
             >
               Add to cart
             </button>
-            <button className="btn bg-black lg:btn-wide text-white">
+            <label
+              htmlFor="payment-modal"
+              className="btn bg-black lg:btn-wide text-white"
+            >
               Buy now
-            </button>
+            </label>
           </div>
           <Tabs product={product} />
         </div>
       </div>
+      <Elements stripe={stripePromise}>
+        <PaymentModal product={product} />
+      </Elements>
     </div>
   );
 };
