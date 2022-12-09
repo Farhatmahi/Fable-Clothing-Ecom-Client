@@ -10,7 +10,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 import { toast } from "react-hot-toast";
 
 const PaymentModal = ({ product }) => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   const { product_name, product_price, _id } = product;
   const [clientSecret, setClientSecret] = useState("");
@@ -19,7 +19,7 @@ const PaymentModal = ({ product }) => {
   const [success, setSuccess] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
-  const price = parseInt(product_price)
+  const price = parseInt(product_price);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -94,10 +94,10 @@ const PaymentModal = ({ product }) => {
 
     if (paymentIntent.status === "succeeded") {
       const payment = {
-        user : user?.email,
-        product_price : product_price,
+        user: user?.email,
+        product_price: product_price,
         transactionId: paymentIntent.id,
-        purchased_Id : _id,
+        purchased_Id: _id,
       };
 
       fetch("http://localhost:1000/payment", {
@@ -130,11 +130,7 @@ const PaymentModal = ({ product }) => {
         });
     }
     setProcessing(false);
-
-
   };
-
-  
 
   return (
     <form onSubmit={handlePayment} className="">
@@ -151,8 +147,20 @@ const PaymentModal = ({ product }) => {
           <p className="py-4">
             Please pay, you'll receive the order within 7 days
           </p>
+          <div className="form-control w-full">
+            <input
+              type="text"
+              placeholder="Write your name"
+              className="input input-bordered w-full border-black rounded-none mb-2"
+            />
+             <input
+              type="text"
+              placeholder="Address"
+              className="input input-bordered w-full border-black rounded-none mb-2"
+            />
+          </div>
           <CardElement
-            className="border px-2 py-4"
+            className="border border-black px-2 py-4"
             options={{
               style: {
                 base: {
@@ -172,7 +180,7 @@ const PaymentModal = ({ product }) => {
             <button
               type="submit"
               className="btn bg-black btn-wide my-4 text-white"
-                disabled={!stripe || !clientSecret || processing}
+              disabled={!stripe || !clientSecret || processing}
             >
               Pay
             </button>

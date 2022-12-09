@@ -83,7 +83,7 @@ const CartCard = ({ cartItem, setTotal, total, refetch }) => {
           <p className="text-sm font-semibold">Price : € {product_price}</p>
           <p
             onClick={() => handleDelete(_id)}
-            className="hover:underline  text-gray-400 hover:text-black text-sm font-semibold"
+            className="hover:underline cursor-pointer text-gray-400 hover:text-black text-sm font-semibold"
           >
             Delete
           </p>
