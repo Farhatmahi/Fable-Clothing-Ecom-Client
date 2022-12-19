@@ -13,7 +13,7 @@ const CartCard = ({ cartItem, setTotal, total, refetch }) => {
   } = cartItem;
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:1000/cart/${id}`, {
+    fetch(`https://fable-server-farhatmahi.vercel.app/cart/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json)

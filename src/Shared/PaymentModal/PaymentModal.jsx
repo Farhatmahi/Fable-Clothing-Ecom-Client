@@ -23,7 +23,7 @@ const PaymentModal = ({ product }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:1000/create-payment-intent", {
+    fetch("https://fable-server-farhatmahi.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const PaymentModal = ({ product }) => {
         purchased_Id: _id,
       };
 
-      fetch("http://localhost:1000/payment", {
+      fetch("https://fable-server-farhatmahi.vercel.app/payment", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -153,7 +153,7 @@ const PaymentModal = ({ product }) => {
               placeholder="Write your name"
               className="input input-bordered w-full border-black rounded-none mb-2"
             />
-             <input
+            <input
               type="text"
               placeholder="Address"
               className="input input-bordered w-full border-black rounded-none mb-2"

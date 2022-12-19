@@ -44,7 +44,7 @@ const ProductPage = () => {
       product_image,
     };
 
-    fetch("http://localhost:1000/cart", {
+    fetch("https://fable-server-farhatmahi.vercel.app/cart", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -55,7 +55,6 @@ const ProductPage = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          
           toast.success(`${product_name} added to cart`, {
             style: {
               padding: "16px",
