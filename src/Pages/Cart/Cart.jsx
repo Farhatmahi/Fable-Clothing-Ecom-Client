@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const Cart = () => {
   const { user } = useContext(AuthContext);
-  // const [cartPriceWithQuantity, setcartPriceWithQuantity] = useState(0);
+  const [cartPriceWithQuantity, setcartPriceWithQuantity] = useState(1);
   const [total, setTotal] = useState(0);
 
   const {
@@ -19,7 +19,7 @@ const Cart = () => {
     queryKey: ["cart"],
     queryFn: async () => {
       const res = await fetch(
-        `https://fable-server-farhatmahi.vercel.app/cartFilteredByUser?email=${user?.email}`
+        `https://fable-server-farhatmahi.vercel.app/cartFilteredByUser?email=${user.email}`
       );
       const data = res.json();
       return data;
@@ -33,7 +33,7 @@ const Cart = () => {
   console.log(cart);
 
   return (
-    <div className="container mx-auto px-4 lg:px-0 mt-8">
+    <div className="container mx-auto px-4 lg:px-0 mt-8 min-h-screen">
       <h1 className="font-semibold text-xl mb-8">Order Summary</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="">
@@ -70,8 +70,8 @@ const Cart = () => {
             <CartCard
               key={cartItem._id}
               cartItem={cartItem}
-              // cartPriceWithQuantity={cartPriceWithQuantity}
-              // setcartPriceWithQuantity={setcartPriceWithQuantity}
+              cartPriceWithQuantity={cartPriceWithQuantity}
+              setcartPriceWithQuantity={setcartPriceWithQuantity}
               setTotal={setTotal}
               total={total}
               refetch={refetch}

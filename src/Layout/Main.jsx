@@ -5,7 +5,7 @@ import Header from '../Shared/Header/Header';
 
 const Main = () => {
     return (
-        <div className='font-Raleway'>
+        <div className='font-Raleway flex flex-col justify-between min-h-full'>
             <Header />
             <Outlet />
             <Footer />

@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const CartCard = ({ cartItem, setTotal, total, refetch }) => {
+const CartCard = ({ cartItem, setTotal, setcartPriceWithQuantity, total, refetch }) => {
   const {
     _id,
     product_name,
@@ -26,22 +26,29 @@ const CartCard = ({ cartItem, setTotal, total, refetch }) => {
   const [quantity, setQuantity] = useState(1);
   const productPrice = parseInt(product_price);
 
+
+  
   const handleIncrement = () => {
     setQuantity(quantity + 1);
+    setTotal(total + productPrice)
   };
 
   const handleDecrement = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
+      setTotal(total - productPrice)
     }
   };
 
-  // setcartPriceWithQuantity(product_price * quantity)
-  // console.log(productPrice, quantity)
+   
+  console.log(total)
+  
   useEffect(() => {
-    setTotal(total - productPrice);
+    // setcartPriceWithQuantity(product_price * quantity)
+    // setTotal(total - productPrice);
     setTotal(productPrice + total); //110, 110+110 =220, 220+110
-  }, [productPrice, quantity]);
+
+  }, []);
 
   return (
     <div className="card card-side bg-base-100 mb-6 rounded-none">
