@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 import { Oval } from "react-loader-spinner";
+import { toast } from "react-hot-toast";
 // import toast from "react-hot-toast";
 
 const Register = () => {
@@ -41,6 +42,18 @@ const Register = () => {
             .then((result) => {
               const user = result.user;
               // console.log(user);
+              toast.success(`Welcome ${user.displayName}`, {
+                style: {
+                  padding: "16px",
+                  backgroundColor: "#000000",
+                  color: "#ffffff",
+                  borderRadius: "0",
+                },
+                iconTheme: {
+                  primary: "#ffffff",
+                  secondary: "#000000",
+                },
+              });
               const userInfo = {
                 displayName: data.name,
                 photoURL: imgdata.data.url,
@@ -82,8 +95,20 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // toast.success("Look at my styles.");
+
         setButtonLoader(false);
+        toast.success(`Welcome ${user.displayName}`, {
+          style: {
+            padding: "16px",
+            backgroundColor: "#000000",
+            color: "#ffffff",
+            borderRadius: "0",
+          },
+          iconTheme: {
+            primary: "#ffffff",
+            secondary: "#000000",
+          },
+        });
         navigate("/");
       })
       .catch((err) => {
@@ -212,24 +237,9 @@ const Register = () => {
           onClick={handleGoogleSignIn}
           className="btn bg-black text-white w-full lg:w-2/3"
         >
-          {buttonLoader ? (
-            <Oval
-              height={20}
-              width={20}
-              color="#c3c3c3"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-              ariaLabel="oval-loading"
-              secondaryColor="#a2a2a2"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-          ) : (
-            <span>
-              Continue with Google <FcGoogle className="ml-3 inline" />
-            </span>
-          )}
+          <span>
+            Continue with Google <FcGoogle className="ml-3 inline" />
+          </span>
         </button>
         <h1 className="mt-4 text-center lg:w-2/3">
           Already have an account?{" "}

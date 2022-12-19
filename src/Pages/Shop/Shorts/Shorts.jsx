@@ -2,11 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Loader from "../../../Shared/Loader/Loader";
 import ProductCard from "../ProductCard/ProductCard";
 
 const Shorts = () => {
   const type = "Shorts";
-  const { data: shorts = [] } = useQuery({
+  const { data: shorts = [], isLoading } = useQuery({
     queryKey: ["shorts"],
     queryFn: async () => {
       const url = `https://fable-server.vercel.app/all-products/${type}`;
@@ -39,6 +40,7 @@ const Shorts = () => {
           </div>
         </h2>
       </div>
+      {isLoading && <Loader />}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {shorts.map((short) => (
           <ProductCard key={short._id} short={short} />

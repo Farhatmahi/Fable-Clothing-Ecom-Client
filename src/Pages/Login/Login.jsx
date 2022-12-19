@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 
@@ -21,37 +21,60 @@ const Login = () => {
   const [buttonLoader, setButtonLoader] = useState(false);
 
   const handleLogin = (data) => {
-    setButtonLoader(true)
+    setButtonLoader(true);
     setLoginError("");
     login(data.email, data.password)
-      .then((result) => { 
+      .then((result) => {
         const user = result.user;
         console.log(user);
-        // toast.success("Look at my styles.");
-        setButtonLoader(false)
+        toast.success(`Welcome ${user.displayName}`, {
+          style: {
+            padding: "16px",
+            backgroundColor: "#000000",
+            color: "#ffffff",
+            borderRadius: "0",
+          },
+          iconTheme: {
+            primary: "#ffffff",
+            secondary: "#000000",
+          },
+        });
+        setButtonLoader(false);
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
         setLoginError("Incorrect password");
-        setButtonLoader(false)
+        setButtonLoader(false);
       });
   };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-    .then((result) => {
-      const user = result.user;
+      .then((result) => {
+        const user = result.user;
         console.log(user);
-        // toast.success("Look at my styles.");
-        setButtonLoader(false)
+        toast.success(`Welcome ${user.displayName}`, {
+          style: {
+            padding: "16px",
+            backgroundColor: "#000000",
+            color: "#ffffff",
+            borderRadius: "0",
+          },
+          iconTheme: {
+            primary: "#ffffff",
+            secondary: "#000000",
+          },
+        });
+        setButtonLoader(false);
         navigate("/");
-    }).catch((err) => {
-      console.log(err);
+      })
+      .catch((err) => {
+        console.log(err);
         setLoginError("Incorrect password");
-        setButtonLoader(false)
-    });
-  }
+        setButtonLoader(false);
+      });
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 mt-10">
@@ -132,24 +155,13 @@ const Login = () => {
             <div className="divider lg:w-2/3">OR</div>
           </div>
         </form>
-        <button onClick={handleGoogleSignIn} className="btn bg-black text-white w-full lg:w-2/3">
-        {buttonLoader ? (
-                <Oval
-                  height={20}
-                  width={20}
-                  color="#c3c3c3"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                  visible={true}
-                  ariaLabel="oval-loading"
-                  secondaryColor="#a2a2a2"
-                  strokeWidth={2}
-                  strokeWidthSecondary={2}
-                />
-              ) : (
-                <span>Continue with Google <FcGoogle className="ml-3 inline" /></span>
-              )}
-          
+        <button
+          onClick={handleGoogleSignIn}
+          className="btn bg-black text-white w-full lg:w-2/3"
+        >
+          <span>
+            Continue with Google <FcGoogle className="ml-3 inline" />
+          </span>
         </button>
         <h1 className="mt-4 text-center lg:w-2/3">
           New here?{" "}

@@ -41,6 +41,7 @@ const Shirts = () => {
           </div>
         </h2>
       </div>
+      {isLoading && <Loader />}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {shirts.map((shirt) => (
           <ProductCard key={shirt._id} shirt={shirt} />

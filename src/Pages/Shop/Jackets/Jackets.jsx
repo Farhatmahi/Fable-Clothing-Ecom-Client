@@ -17,9 +17,9 @@ const Jackets = () => {
     },
   });
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  // if (isLoading) {
+  //   return <Loader />;
+  // }
 
   return (
     <div className="">
@@ -45,6 +45,7 @@ const Jackets = () => {
           </div>
         </h2>
       </div>
+      {isLoading && <Loader />}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {jackets.map((jacket) => (
           <ProductCard key={jacket._id} jacket={jacket} />
