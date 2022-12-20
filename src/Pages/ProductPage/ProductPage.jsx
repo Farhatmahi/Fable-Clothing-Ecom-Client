@@ -138,7 +138,7 @@ const ProductPage = () => {
         </div>
       </div>
       <Elements stripe={stripePromise}>
-        <PaymentModal product={product} />
+        <PaymentModal product={product}  />
       </Elements>
     </div>
   );

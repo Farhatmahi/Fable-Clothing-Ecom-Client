@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import {
   CardElement,
@@ -9,24 +10,26 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import { toast } from "react-hot-toast";
 
-const PaymentModal = ({ product }) => {
+const CartTotalPayment = ({  total }) => {
   const { user } = useContext(AuthContext);
 
-  const { product_name, product_price, _id } = product;
+//   const { product_name, product_price, _id } = product;
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [cardError, setCardError] = useState("");
   const [success, setSuccess] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
-  const price = parseInt(product_price);
+//   const price = parseInt(product_price);
+const price = total
 
   useEffect(() => {
+    
     // Create PaymentIntent as soon as the page loads
     fetch("https://fable-server-farhatmahi.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
         authorization: `bearer ${localStorage.getItem("access-token")}`,
       },
       body: JSON.stringify({ price }),
@@ -94,9 +97,9 @@ const PaymentModal = ({ product }) => {
     if (paymentIntent.status === "succeeded") {
       const payment = {
         user: user?.email,
-        product_price: product_price,
+        // product_price: product_price,
         transactionId: paymentIntent.id,
-        purchased_Id: _id,
+        // purchased_Id: _id,
       };
 
       fetch("https://fable-server-farhatmahi.vercel.app/payment", {
@@ -133,31 +136,19 @@ const PaymentModal = ({ product }) => {
 
   return (
     <form onSubmit={handlePayment} className="">
-      <input type="checkbox" id="payment-modal" className="modal-toggle" />
+      <input type="checkbox" id="cart-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
           <label
-            htmlFor="payment-modal"
+            htmlFor="cart-modal"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">{product_name}</h3>
+          <h3 className="text-lg font-bold">You will be charged  €{total}</h3>
           <p className="py-4">
             Please pay, you'll receive the order within 7 days
           </p>
-          <div className="form-control w-full">
-            <input
-              type="text"
-              placeholder="Write your name"
-              className="input input-bordered w-full border-black rounded-none mb-2"
-            />
-             <input
-              type="text"
-              placeholder="Address"
-              className="input input-bordered w-full border-black rounded-none mb-2"
-            />
-          </div>
           <CardElement
             className="border border-black px-2 py-4"
             options={{
@@ -190,4 +181,4 @@ const PaymentModal = ({ product }) => {
   );
 };
 
-export default PaymentModal;
+export default CartTotalPayment;

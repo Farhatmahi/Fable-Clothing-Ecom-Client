@@ -1,6 +1,6 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
@@ -8,8 +8,11 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 
+
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -40,7 +43,7 @@ const Login = () => {
           },
         });
         setButtonLoader(false);
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -67,7 +70,7 @@ const Login = () => {
           },
         });
         setButtonLoader(false);
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);

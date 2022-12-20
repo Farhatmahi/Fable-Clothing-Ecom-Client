@@ -1,8 +1,18 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import CartTotalPayment from "../../Shared/PaymentModal/CartTotalPayment";
+import PaymentModal from "../../Shared/PaymentModal/PaymentModal";
 
-const CartCard = ({ cartItem, setTotal, setcartPriceWithQuantity, total, refetch }) => {
+const CartCard = ({
+  cartItem,
+  setTotal,
+  setcartPriceWithQuantity,
+  total,
+  refetch,
+}) => {
   const {
     _id,
     product_name,
@@ -26,29 +36,22 @@ const CartCard = ({ cartItem, setTotal, setcartPriceWithQuantity, total, refetch
   const [quantity, setQuantity] = useState(1);
   const productPrice = parseInt(product_price);
 
-
-  
   const handleIncrement = () => {
     setQuantity(quantity + 1);
-    setTotal(total + productPrice)
+    setTotal(total + productPrice);
   };
 
   const handleDecrement = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      setTotal(total - productPrice)
+      setTotal(total - productPrice);
     }
   };
 
-   
-  console.log(total)
-  
   useEffect(() => {
-    // setcartPriceWithQuantity(product_price * quantity)
-    // setTotal(total - productPrice);
     setTotal(productPrice + total); //110, 110+110 =220, 220+110
-
   }, []);
+
 
   return (
     <div className="card card-side bg-base-100 mb-6 rounded-none">
@@ -87,15 +90,18 @@ const CartCard = ({ cartItem, setTotal, setcartPriceWithQuantity, total, refetch
           </p>
         </div>
         <div className="flex justify-between">
-          <p className="text-sm font-semibold">Price : € {product_price}</p>
+          <p className="text-sm font-semibold">
+            Price : € {product_price * quantity}
+          </p>
           <p
             onClick={() => handleDelete(_id)}
-            className="hover:underline cursor-pointer text-gray-400 hover:text-black text-sm font-semibold"
+            className=" cursor-pointer text-gray-400 hover:text-black hover:underline text-sm font-semibold"
           >
             Delete
           </p>
         </div>
       </div>
+      
     </div>
   );
 };

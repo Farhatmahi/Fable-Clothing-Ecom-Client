@@ -20,7 +20,7 @@ const Shirts = () => {
   return (
     <div>
       <div className="flex justify-between mb-6">
-        <h2 className="font-semibold">Jackets KLS</h2>
+        <h2 className="font-semibold">Shirts KLS</h2>
         <h2>
           Sort by :{" "}
           <div className="dropdown dropdown-end">
