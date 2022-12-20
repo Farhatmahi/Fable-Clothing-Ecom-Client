@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useContext } from "react";
@@ -26,7 +25,7 @@ const Tabs = ({ product }) => {
     queryKey: ["reviews", _id],
     queryFn: async () => {
       const url = `https://fable-server-farhatmahi.vercel.app/reviews?product=${_id}`;
-      console.log(url);
+      // console.log(url);
       const res = await fetch(url);
       const data = await res.json();
       return data;
@@ -58,7 +57,7 @@ const Tabs = ({ product }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.acknowledged) {
           toast.success(`Review added`, {
             style: {
@@ -79,7 +78,7 @@ const Tabs = ({ product }) => {
   };
 
 
-  console.log(reviews);
+  // console.log(reviews);
 
   return (
     <div className="tabs mt-8">

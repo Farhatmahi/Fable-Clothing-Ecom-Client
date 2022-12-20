@@ -104,16 +104,16 @@ const ProductPage = () => {
           <img src={product_image} className="bg-[#F1F1EF] w-full" alt="" />
         </div>
         <div className="">
-          <h1 className="text-xl uppercase">{product_name}</h1>
-          <h2 className="text-2xl mt-4 font-semibold">€ {product_price}</h2>
-          <div className="my-8">
+          <h1 className="text-md text-gray-400 lg:text-black text-center lg:text-left lg:text-xl lg:uppercase">{product_name}</h1>
+          <h2 className="text-2xl lg:mt-4 font-semibold text-center lg:text-left">€ {product_price}</h2>
+          <div className="my-8 flex justify-around lg:justify-start">
             {product_size.map((size) => (
-              <button
+              <button key={size}
                 onClick={() => {
                   handleSize(size);
                   setActive(true);
                 }}
-                className={`btn btn-square btn-outline rounded-none ml-2
+                className={`btn btn-square btn-outline rounded-none lg:mr-4
                 }`}
               >
                 {size}

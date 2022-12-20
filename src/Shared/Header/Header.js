@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useContext } from "react";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
@@ -30,45 +29,17 @@ const Header = () => {
 
   const menuItems = (
     <>
-      <li>
+      <li className="font-semibold">
         <Link to="/">HOME</Link>
       </li>
-      <li>
+      <li className="font-semibold">
         <Link to="/shop">SHOP</Link>
       </li>
-      <li>
+      <li className="font-semibold">
         <Link to="login" className="uppercase lg:hidden">
           Login/SignUp
         </Link>
       </li>
-      {/* <li tabIndex={0}>
-        <Link className="justify-between">
-          COLLECTIONS
-          <svg
-            className="fill-current"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-          </svg>
-        </Link>
-        <ul className="p-2 bg-base-200">
-          <li>
-            <Link>JACKETS</Link>
-          </li>
-          <li>
-            <Link>TROUSERS</Link>
-          </li>
-          <li>
-            <Link>SHORTS</Link>
-          </li>
-        </ul>
-      </li> */}
-      {/* <li>
-        <Link to="/">SALES</Link>
-      </li> */}
     </>
   );
   return (
@@ -95,34 +66,8 @@ const Header = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            {/* <li>
-              <Link>Item 1</Link>
-            </li>
-            <li tabIndex={0}>
-              <Link className="justify-between">
-                Parent
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-              </Link>
-              <ul className="p-2">
-                <li>
-                  <Link>Submenu 1</Link>
-                </li>
-                <li>
-                  <Link>Submenu 2</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link>Item 3</Link>
-            </li> */}
+    
+
             {menuItems}
           </ul>
         </div>
@@ -183,15 +128,6 @@ const Header = () => {
                 tabIndex={0}
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <Link className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link>Settings</Link>
-                </li>
                 <li>
                   <Link onClick={handleLogOut}>Logout</Link>
                 </li>

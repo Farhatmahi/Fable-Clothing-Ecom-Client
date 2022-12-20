@@ -47,7 +47,7 @@ const Cart = () => {
   //     });
   // }, [user?.email]);
 
-  console.log(cart);
+  // console.log(cart);
 
   let sum = 0;
   cart.map((cartItem) => {
@@ -145,7 +145,9 @@ const Cart = () => {
               <label className="btn bg-white hover:bg-black hover:text-white text-black border-black focus:bg-black focus:text-white lg:btn-wide w-full rounded-none">
                 To the door
               </label>
+              
             </div>
+            
           </div>
           <div className="form-control w-full mb-4">
             <label className="label">
@@ -206,9 +208,9 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      {/* <Elements stripe={stripePromise}>
-        <CartTotalPayment cart={cart} total={total} />
-      </Elements> */}
+      <Elements stripe={stripePromise}>
+        <CartTotalPayment cart={cart} total={total + 10} />
+      </Elements>
     </div>
   );
 };
