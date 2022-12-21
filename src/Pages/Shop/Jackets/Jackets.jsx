@@ -25,7 +25,7 @@ const Jackets = () => {
     <div className="">
       <div className="flex justify-between mb-6">
         <h2 className="font-semibold">Jackets KLS</h2>
-        <h2>
+        {/* <h2>
           Sort by :{" "}
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="text-gray-400 m-1">
@@ -43,7 +43,7 @@ const Jackets = () => {
               </li>
             </ul>
           </div>
-        </h2>
+        </h2> */}
       </div>
       {isLoading && <Loader />}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">

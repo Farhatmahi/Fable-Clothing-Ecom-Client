@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-// import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import PaymentModal from "../../Shared/PaymentModal/PaymentModal";
@@ -34,7 +33,7 @@ const ProductPage = () => {
   };
 
   const handleAddToCart = () => { 
-    if(user.email){
+    if(user?.email){
       const productData = {
         email: user?.email,
         product_name,
