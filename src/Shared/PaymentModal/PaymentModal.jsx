@@ -8,6 +8,7 @@ import {
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const PaymentModal = ({ product }) => {
   const { user } = useContext(AuthContext);
@@ -134,58 +135,77 @@ const PaymentModal = ({ product }) => {
   return (
     <form onSubmit={handlePayment} className="">
       <input type="checkbox" id="payment-modal" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box relative">
-          <label
-            htmlFor="payment-modal"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
-          >
-            ✕
-          </label>
-          <h3 className="text-lg font-bold">{product_name}</h3>
-          <p className="py-4">
-            Please pay, you'll receive the order within 7 days
-          </p>
-          <div className="form-control w-full">
-            <input
-              type="text"
-              placeholder="Write your name"
-              className="input input-bordered w-full border-black rounded-none mb-2"
-            />
-             <input
-              type="text"
-              placeholder="Address"
-              className="input input-bordered w-full border-black rounded-none mb-2"
-            />
-          </div>
-          <CardElement
-            className="border border-black px-2 py-4"
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#424770",
-                  "::placeholder": {
-                    color: "#aab7c4",
+      {user?.email ? (
+        <div className="modal">
+          <div className="modal-box relative">
+            <label
+              htmlFor="payment-modal"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <h3 className="text-lg font-bold">{product_name}</h3>
+            <p className="py-4">
+              Please pay, you'll receive the order within 7 days
+            </p>
+            <div className="form-control w-full">
+              <input
+                type="text"
+                placeholder="Write your name"
+                className="input input-bordered w-full border-black rounded-none mb-2"
+              />
+              <input
+                type="text"
+                placeholder="Address"
+                className="input input-bordered w-full border-black rounded-none mb-2"
+              />
+            </div>
+            <CardElement
+              className="border border-black px-2 py-4"
+              options={{
+                style: {
+                  base: {
+                    fontSize: "16px",
+                    color: "#424770",
+                    "::placeholder": {
+                      color: "#aab7c4",
+                    },
+                  },
+                  invalid: {
+                    color: "#9e2146",
                   },
                 },
-                invalid: {
-                  color: "#9e2146",
-                },
-              },
-            }}
-          />
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="btn bg-black btn-wide my-4 text-white"
-              disabled={!stripe || !clientSecret || processing}
-            >
-              Pay
-            </button>
+              }}
+            />
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="btn bg-black btn-wide my-4 text-white"
+                disabled={!stripe || !clientSecret || processing}
+              >
+                Pay
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="modal">
+          <div className="modal-box relative">
+            <label
+              htmlFor="payment-modal"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <div className="text-center">
+              <h3 className="text-lg font-semibold mb-4">Please log in to purchase this product</h3>
+              <Link to="/login" className="btn bg-black text-white btn-wide">
+                Log in
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </form>
   );
 };

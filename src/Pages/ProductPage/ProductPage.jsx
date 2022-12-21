@@ -33,18 +33,19 @@ const ProductPage = () => {
     setSize(size);
   };
 
-  const handleAddToCart = () => {
-    const productData = {
-      email: user.email,
-      product_name,
-      product_id: _id,
-      product_price,
-      product_size: size,
-      product_type,
-      product_image,
-    };
-
-    fetch("https://fable-server-farhatmahi.vercel.app/cart", {
+  const handleAddToCart = () => { 
+    if(user.email){
+      const productData = {
+        email: user?.email,
+        product_name,
+        product_id: _id,
+        product_price,
+        product_size: size,
+        product_type,
+        product_image,
+      };
+  
+      fetch("https://fable-server-farhatmahi.vercel.app/cart", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -81,7 +82,22 @@ const ProductPage = () => {
             },
           });
         }
+      })
+    }
+    else{
+      toast.error(`You need to log in before adding product to the cart`, {
+        style: {
+          padding: "16px",
+          backgroundColor: "#000000",
+          color: "#ffffff",
+          borderRadius: "0",
+        },
+        iconTheme: {
+          primary: "#ffffff",
+          secondary: "#000000",
+        },
       });
+    }
   };
 
   return (
