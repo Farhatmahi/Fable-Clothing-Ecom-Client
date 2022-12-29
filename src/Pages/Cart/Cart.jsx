@@ -10,6 +10,7 @@ import CartTotalPayment from "../../Shared/PaymentModal/CartTotalPayment";
 import { loadStripe } from "@stripe/stripe-js";
 import Loader from "../../Shared/Loader/Loader";
 import { createContext } from "react";
+import { motion } from "framer-motion";
 
 export const CartContext = createContext();
 
@@ -57,7 +58,12 @@ const Cart = ({ children }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 lg:px-0 mt-8 min-h-screen">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container mx-auto px-4 lg:px-0 mt-8 min-h-screen"
+    >
       <h1 className="font-semibold text-xl mb-8">Order Summary</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <form onSubmit={handlePlaceOrder} className="order-2 lg:order-1">
@@ -192,7 +198,7 @@ const Cart = ({ children }) => {
       <Elements stripe={stripePromise}>
         <CartTotalPayment cart={cart} total={total + 10} />
       </Elements>
-    </div>
+    </motion.div>
   );
 };
 

@@ -27,7 +27,7 @@ const Reviews = () => {
   return (
     <div>
       <h1 className="font-semibold text-xl mb-8">Reviews</h1>
-      <div class="grid gap-6 mb-8 md:mb-12 md:grid-cols-2">
+      <div className="grid gap-6 mb-8 md:mb-12 md:grid-cols-2">
         {
             shuffledReviews.map(review => <ReviewsCard key={review._id} review={review}/>)
         }

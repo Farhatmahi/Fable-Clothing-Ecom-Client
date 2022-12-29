@@ -8,6 +8,7 @@ import Tabs from "./Tabs";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { toast } from "react-hot-toast";
+import {motion} from 'framer-motion'
 
 const ProductPage = () => {
   const { user } = useContext(AuthContext);
@@ -100,7 +101,10 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 lg:px-0 mt-8">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }} className="container mx-auto px-4 lg:px-0 mt-8">
       <div className="text-sm lg:text-md font-semibold breadcrumbs">
         <ul>
           <li>
@@ -155,7 +159,7 @@ const ProductPage = () => {
       <Elements stripe={stripePromise}>
         <PaymentModal product={product}  />
       </Elements>
-    </div>
+    </motion.div>
   );
 };
 

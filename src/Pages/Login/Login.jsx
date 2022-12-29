@@ -7,6 +7,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
+import {motion} from 'framer-motion'
 
 
 const Login = () => {
@@ -80,7 +81,10 @@ const Login = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 mt-10">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }} className="grid grid-cols-1 lg:grid-cols-2 mt-10">
       <div className="lg:ml-20 px-4 lg:px-0">
         <h1 className="font-semibold text-xl mb-8">Sign In</h1>
         <form onSubmit={handleSubmit(handleLogin)} className="card-body p-0">
@@ -171,7 +175,7 @@ const Login = () => {
       <div className="hidden lg:block">
         <img src="https://i.ibb.co/7zxLx9Y/Foto-15.png" alt="" />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -110,7 +110,7 @@ const Header = () => {
                 <span className="font-bold text-lg">{cart.length} Items</span>
                 {/* <span className="">Subtotal: €</span> */}
                 <div className="card-actions">
-                  <Link to="/cart" className="btn btn-primary btn-block">
+                  <Link to="/cart" className="btn btn-primary btn-block bg-black text-white">
                     View cart
                   </Link>
                 </div>

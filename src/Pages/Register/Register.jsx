@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 import { Oval } from "react-loader-spinner";
 import { toast } from "react-hot-toast";
-// import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const {
@@ -27,7 +27,6 @@ const Register = () => {
     const formData = new FormData();
     formData.append("image", image);
 
-    
     const url = `https://api.imgbb.com/1/upload?key=381f7ea874fe4bbe6dc427dd3054e6b1 `;
 
     fetch(url, {
@@ -122,7 +121,12 @@ const Register = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 mt-10">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="grid grid-cols-1 lg:grid-cols-2 mt-10"
+    >
       <div className="lg:ml-20 px-4 lg:px-0">
         <h1 className="font-semibold text-xl mb-8">Sign Up</h1>
         <form onSubmit={handleSubmit(hangleRegister)} className="card-body p-0">
@@ -241,7 +245,7 @@ const Register = () => {
       <div className="">
         <img src="https://i.ibb.co/7zxLx9Y/Foto-15.png" alt="" />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
