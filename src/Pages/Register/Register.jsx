@@ -27,6 +27,7 @@ const Register = () => {
     const formData = new FormData();
     formData.append("image", image);
 
+    
     const url = `https://api.imgbb.com/1/upload?key=381f7ea874fe4bbe6dc427dd3054e6b1 `;
 
     fetch(url, {
@@ -62,17 +63,6 @@ const Register = () => {
                 .then((result) => {
                   saveUserToDb(user.displayName, user.email, imgdata.data.url);
                   setButtonLoader(false);
-                  // toast.success(`Welcome ${user.displayName}`, {
-                  //   style: {
-                  //     border: "1px solid #000000",
-                  //     padding: "16px",
-                  //     color: "#713200",
-                  //   },
-                  //   iconTheme: {
-                  //     primary: "#713200",
-                  //     secondary: "#FFFAEE",
-                  //   },
-                  // });
                   navigate("/");
                 })
                 .catch((err) => {

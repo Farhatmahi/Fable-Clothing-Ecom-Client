@@ -8,9 +8,12 @@ import { useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import CartTotalPayment from "../../Shared/PaymentModal/CartTotalPayment";
 import { loadStripe } from "@stripe/stripe-js";
-import Loader from "../../Shared/Loader/Loader"
+import Loader from "../../Shared/Loader/Loader";
+import { createContext } from "react";
 
-const Cart = () => {
+export const CartContext = createContext();
+
+const Cart = ({ children }) => {
   const { user, loading, setLoading } = useContext(AuthContext);
   const [cartPriceWithQuantity, setcartPriceWithQuantity] = useState(1);
   const [total, setTotal] = useState(0);
@@ -30,25 +33,6 @@ const Cart = () => {
     },
   });
 
-
-  // const [cart, setCart] = useState([]);
-
-  // useEffect(() => {
-  //   console.log(user.email);
-  //   setLoading(true);
-  //   fetch(
-  //     `https://fable-server-farhatmahi.vercel.app/cartFilteredByUser?email=${user?.email}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setLoading(false);
-  //       return setCart(data);
-        
-  //     });
-  // }, [user?.email]);
-
-  // console.log(cart);
-
   let sum = 0;
   cart.map((cartItem) => {
     const productPrice = parseInt(cartItem.product_price);
@@ -63,7 +47,6 @@ const Cart = () => {
   if (isLoading) {
     return <Loader />;
   }
-
 
   const stripePromise = loadStripe(
     "pk_test_51M7FK2JH0OzhgIOy9rRnhZiTBKnIDP2aQJVRCrfYfNuLtnLZj2I5YeuvhaFQSgkNkvOHCtkG0KCb6ku5BkQfZNyO002uQYn9Jk"
@@ -145,9 +128,7 @@ const Cart = () => {
               <label className="btn bg-white hover:bg-black hover:text-white text-black border-black focus:bg-black focus:text-white lg:btn-wide w-full rounded-none">
                 To the door
               </label>
-              
             </div>
-            
           </div>
           <div className="form-control w-full mb-4">
             <label className="label">

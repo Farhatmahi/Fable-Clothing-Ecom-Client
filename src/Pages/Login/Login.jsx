@@ -88,11 +88,6 @@ const Login = () => {
             <label className="label">
               <span className="label-text text-black font-semibold">Email</span>
             </label>
-            {/* <input
-              type="text"
-              placeholder="email"
-              className="input input-bordered w-2/3"
-            /> */}
             <input
               {...register("email", { required: "Please enter your email" })}
               placeholder="email"
